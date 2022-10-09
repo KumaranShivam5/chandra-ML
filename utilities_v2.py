@@ -251,8 +251,8 @@ class make_model():
 
     """
 
-    def __init__(self, name, classifier, oversampler, train_data,label):
-        self.name = name 
+    def __init__(self, model_name, classifier, oversampler, train_data,label):
+        self.name = model_name 
         self.clf = classifier 
         self.train_data = train_data
         self.oversampler = oversampler
@@ -302,7 +302,7 @@ class make_model():
             Relative path with filename where model is to be saved.
         """
         import joblib
-        joblib.dump(self, fname)
+        joblib.dump(self, fname , compress=5)
 
 
 
