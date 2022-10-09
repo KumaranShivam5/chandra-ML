@@ -1,4 +1,4 @@
-# Imports
+# Chandra-ML
 
 
 ```python
@@ -9,7 +9,7 @@ import pandas as pd
 %autoreload 2
 ```
 
-# Load Training data
+# Data
 
 
 ```python
@@ -65,7 +65,7 @@ import nbconvert
 from utilities_v2 import make_model
 ```
 
-### Components for the _make_model_ object
+### Build the Model: _make_model_ class
 
 _make_model_ takes in the following components
 *   name : user defined name of the model (can be any string)
@@ -107,14 +107,39 @@ from imblearn.over_sampling import SMOTE
 oversampler = SMOTE(k_neighbors=4)
 ```
 
+#### Put everything together 
+
 
 ```python
-
 model = make_model(model_name = 'test_model', classifier=clf, oversampler = oversampler, train_data = x, label=y)
+```
 
-# Validate model
-model.validate(save_predictions=True, multiprocessing=True, k_fold=20)
+### Validate the Model
 
+the object _make_model_ implements *validate* function ehich performs the Cumultive K fold cross validation for the supplied model and for the given data
+
+
+```python
+model.validate(save_predictions=True, multiprocessing=True, k_fold=2)
+```
+
+    [INFO] >>> Doing 2 fold cross-validation
+    [INFO] >>> Using 8 CPU cores
+
+
+
+
+
+    <utilities_v2.make_model at 0x7fa1abe20898>
+
+
+
+Let us see the validation result
+
+The validation results are stored in the attribute _validation_model_ of the _make_model_ object
+
+
+```python
 # Print validation result
 print("Confusion Matrix: ")
 print(model.validation_score['class_labels'])
@@ -123,11 +148,59 @@ print("Overall Scores: ")
 print(model.validation_score['overall_scores'])
 print("Class-Wise scores: ")
 print(model.validation_score['class_wise_scores'])
+```
 
-# Once satisfied with the mdoel performance
-# train the mdoel on entire training dataset
+    Confusion Matrix: 
+    ['AGN', 'CV', 'HMXB', 'LMXB', 'PULSAR', 'STAR', 'ULX', 'YSO']
+    [[2197    7  102    0   13   18   56    2]
+     [  11   33   29    2   28   42    7   14]
+     [  33   15  557    4   11   32   88    8]
+     [   4    8    5  106    2    8    4    6]
+     [   2   18   17    0   32   11    9   12]
+     [  35   34   33    7   19 2572    6   84]
+     [  15    6   59    3    7    3  118    0]
+     [   2   14    8    4   19   50    2 1050]]
+    Overall Scores: 
+    {'balanced_accuracy': 0.6642261754119165, 'accuracy': 0.8652473062443204, 'precision': 0.8727987144236677, 'recall': 0.8652473062443204, 'f1': 0.8682408798541683, 'mcc': 0.8190420660929271}
+    Class-Wise scores: 
+            recall_score  precision_score  f1_score
+    class                                          
+    AGN         0.917328         0.955633  0.936089
+    CV          0.198795         0.244444  0.219269
+    HMXB        0.744652         0.687654  0.715019
+    LMXB        0.741259         0.841270  0.788104
+    PULSAR      0.316832         0.244275  0.275862
+    STAR        0.921864         0.940058  0.930872
+    ULX         0.559242         0.406897  0.471058
+    YSO         0.913838         0.892857  0.903226
+
+
+### Train the model
+
+Now the above validation function can be used by varying the classifier parameters and then checking the validation result as per the user requirement, and once the results are satisfactoory, the user call the _train_ function of the _make_model_ object which will train and store the supplied classifier. for training, unlike the cross validation where a fraction of th data is used, here the classifier is trained on the entire dataset.
+
+
+```python
 model.train()
+```
 
-# save the mdoel
+
+
+
+    <utilities_v2.make_model at 0x7fa1abe20898>
+
+
+
+### Save the Model
+
+Next we will use the _save_ function of the object _make_model_ to save the classifier alongwith the validation scores and predictions on the training data
+
+
+```python
 model.save('model_filename.joblib')
+```
+
+
+```python
+
 ```
