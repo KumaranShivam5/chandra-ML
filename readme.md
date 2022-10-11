@@ -39,7 +39,7 @@ import pandas as pd
 All the data for this work is in the folder *_data_* folder. 
 
 <small>
-Due to size constrains of this github, the data is not included in this repository. It is uploaded to the google drive *drive link* in a zipped file. Download and extract the folder in this directory and do not change the file names.
+Due to size constrains of this github, the data is not included in this repository. It is uploaded to the google drive *drive link* in a zipped file. Download and extract the folder in this directory and do not change the file names. the **data** folder should be in the same directory as *choices.py* and *utilities_v2.py* files
 </small>
 
 
