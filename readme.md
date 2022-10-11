@@ -1668,10 +1668,14 @@ lgb_model
 
 ### Predict
 
+The classifier is inside the *make_model* object and can be accessed by the clf attribute of the *make_model* object
+
 
 ```python
 clf = lgb_model.clf
 ```
+
+The following routine gets the predictions and the class membership probabilities in pretty dataframe format form the classifier applied on the given data of new sources.
 
 
 ```python
