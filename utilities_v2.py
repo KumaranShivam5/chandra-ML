@@ -19,6 +19,19 @@ import pandas as pd
 from sklearn.metrics import accuracy_score, balanced_accuracy_score, precision_score, f1_score, recall_score, matthews_corrcoef, confusion_matrix
 from sklearn.model_selection import LeaveOneOut, StratifiedKFold 
 
+def deets(df ,class_info = 0 ,dsp=0):
+    print('_____________________________________________________')
+    if(dsp):
+        display(df)
+        print('_____________________________________________________')
+    print('------------------------------')
+    print(f'Number of Objects : {df.shape[0]}')
+    print(f'Number of Columns : {df.shape[1]}')
+    if(class_info):
+        print('------------------------------')
+        display(df['class'].value_counts())
+    print('_____________________________________________________')
+#df_deets(data)
 
 
 def train_classifier_model(arr):
@@ -140,6 +153,7 @@ def cumulative_cross_validation(x,y, classifier, oversampler = None,  k_fold=-1,
             result = pool.map(train_classifier_model, zipped_arr) 
     else:
         result = []
+        print('[INFO] Not using Multi-processing')
         for a in tqdm(zipped_arr):
             result.append(train_classifier_model(a))
 
