@@ -1703,6 +1703,6 @@ u_df = get_pred_table(all_new)
 u_df
 ```
 
-> The predictions from our classifier is stored in the folder *data/classified/* class-wise. 
+**The predictions from our classifier is stored in the folder *data/classified/* class-wise.** 
 
 
