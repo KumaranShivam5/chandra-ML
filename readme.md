@@ -117,7 +117,7 @@ sources
 
 
 
-
+<!-- 
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -131,7 +131,7 @@ sources
     .dataframe thead th {
         text-align: right;
     }
-</style>
+</style> -->
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -196,7 +196,7 @@ source_info
 
 
 <div>
-<style scoped>
+<!-- <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
     }
@@ -208,7 +208,7 @@ source_info
     .dataframe thead th {
         text-align: right;
     }
-</style>
+</style> -->
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
